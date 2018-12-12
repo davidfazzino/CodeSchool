@@ -1,0 +1,111 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    Register a new Course
+  </div>
+
+  <div class="panel-body">
+    <form class="form-horizontal" novalidate (ngSubmit)="save(createCourseForm)" 
+    #createCourseForm="ngForm">
+      <fieldset>
+        <div class="form-group" [ngClass]="{'is-invalid': (title.touched || title.dirty) && !title.valid }">
+
+          <label class="col-md-2 control-label" for="titileId">Title</label>
+
+          <div class="col-md-8">
+            <input class="form-control" id="titleId" type="text" 
+                 placeholder="(required)" required minlength="2"
+              [(ngModel)]="newCourse.title" name="titolo" #title="ngModel" />
+            <span class="help-block" *ngIf="(title.touched || title.dirty) && title.errors">
+              <span *ngIf="title.errors?.required">
+                A new book must have a title
+              </span>
+              <span *ngIf="title.errors?.minlength">
+                The title must have at least 2 chars.
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group" [ngClass]="{'is:invalid': (instructor.touched || instructor.dirty) && !instructor.valid }">
+          <label class="col-md-2 control-label" for="instructorId">Instructor Name</label>
+
+          <div class="col-md-8">
+            <input class="form-control" id="instructorId" type="text" 
+            placeholder="(required)"
+             required minlength="4"
+              maxlength="10" 
+              pattern="^[a-zA-Z ]+$" [(ngModel)]="newCourse.instructor" name="instructor" #instructor="ngModel" />
+            <span class="help-block" *ngIf="(instructor.touched || instructor.dirty) && instructor.errors">
+              <span *ngIf="instructor.errors?.required">
+                Please enter an instructor name.
+              </span>
+              <span *ngIf="title.errors?.maxlength">
+                The instructor name cannot have more than 10 characters.
+              </span>
+              <span *ngIf="title.errors?.minlength">
+                The instructor name must have at least 4 chars.
+              </span>
+              <span *ngIf="title.errors?.pattern">
+                The instructor name must contain only letters
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group" [ngClass]="{'has-error': (duration.touched || duration.dirty) && !duration.valid }">
+          <label class="col-md-2 control-label" for="durationId">Duration</label>
+
+          <div class="col-md-8">
+            <input class="form-control" id="durationId" type="text"
+             placeholder="in days (required)" required pattern="[0-9]+"
+              [(ngModel)]="newCourse.duration" name="duration" #duration="ngModel" />
+            <span class="help-block" *ngIf="(duration.touched || duration.dirty) && duration.errors">
+              <span *ngIf="duration.errors.required">
+                Course duration is required.
+              </span>
+              <span *ngIf="duration.errors?.pattern">
+                Please enter only numbers for duration.
+              </span>
+            </span>
+          </div>
+        </div>
+
+
+        <div class="form-group" [ngClass]="{'has-error': (price.touched || price.dirty) && !price.valid }">
+          <label class="col-md-2 control-label" for="priceId">Price</label>
+
+          <div class="col-md-8">
+            <input class="form-control" id="priceId" type="text" placeholder="(required)" required pattern="[0-9.,]+"
+              [(ngModel)]="newCourse.price" name="price" #price="ngModel" />
+            <span class="help-block" *ngIf="(price.touched || price.dirty) && price.errors">
+              <span *ngIf="price.errors?.required">
+                Course price is required.
+              </span>
+              <span *ngIf="price.errors?.pattern">
+                Please enter only numbers for price.
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-md-4 col-md-offset-2">
+            <span>
+              <button class="btn btn-primary" type="submit" 
+              [disabled]="!createCourseForm.valid">
+                Save
+              </button>
+            </span>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+
+
+<br>Dirty: {{ createCourseForm.dirty }}
+<br>Touched: {{ createCourseForm.touched }}
+<br>Valid: {{ createCourseForm.valid }}
+<br>Value: {{ createCourseForm.value | json }}

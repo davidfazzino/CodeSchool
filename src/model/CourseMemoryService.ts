@@ -9,9 +9,9 @@ export class CourseMemoryService extends CourseService {
     }
 
     private courses: Course[] = [
-        new Course(1,"Angular Rules", 100, 1000),
-        new Course(2,"Viva TypeScript", 10, 500),
-        new Course(3,"Kotlin is the new Java", 1, 5000)
+        new Course(1,"Angular Rules", "gino",100, 1000),
+        new Course(2,"Viva TypeScript","gigi", 10, 500),
+        new Course(3,"Kotlin is the new Java","beppe", 1, 5000)
 
     ]; 
 }

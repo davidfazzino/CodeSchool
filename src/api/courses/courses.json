@@ -2,18 +2,21 @@
     {
         "id": 1,
         "title": "TypeScript Rules!",
+        "instructor": "gigi",
         "duration": 100,
         "price": 800
     },
     {
         "id": 2,
         "title": "Angular Rules!",
+        "instructor": "ciccio",
         "duration": 10,
         "price": 90
     },
     {
         "id": 3,
         "title": "Js for dummies",
+        "instructor": "pino",
         "duration": 100,
         "price": 900
     }
