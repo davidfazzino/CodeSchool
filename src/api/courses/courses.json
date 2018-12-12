@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "title": "TypeScript Rules!",
+        "duration": 100,
+        "price": 800
+    },
+    {
+        "id": 2,
+        "title": "Angular Rules!",
+        "duration": 10,
+        "price": 90
+    },
+    {
+        "id": 3,
+        "title": "Js for dummies",
+        "duration": 100,
+        "price": 900
+    }
+]
