@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Course } from '../../model/Course';
 import { NgForm } from '@angular/forms';
+import { CourseService } from '../../model/CourseService';
 
 @Component({
   selector: 'app-create-course',
@@ -10,18 +11,21 @@ import { NgForm } from '@angular/forms';
 export class CreateCourseComponent implements OnInit {
 
   newCourse: Course;
-  constructor() {
-
-   }
+  constructor(private service: CourseService) {
+  }
 
   ngOnInit() {
     this.newCourse = new Course(null, null, null,null,  null);
   }
 
   save(createForm: NgForm) : void {
-    console.log(createForm.value);
-    console.log("************************************");
-    console.log(JSON.stringify(this.newCourse));
+    this.service.saveCourse(this.newCourse).subscribe(
+      c => {
+        console.log("course saved ");
+        console.log(JSON.stringify(c));
+      } 
+      
+    );
   }
 
 }

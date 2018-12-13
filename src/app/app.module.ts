@@ -11,13 +11,17 @@ import { CourseRestService } from '../model/CourseRestService';
 import { CourseMemoryService } from '../model/CourseMemoryService';
 import { CreateCourseComponent } from './create-course/create-course.component';
 import { CreateCourseReactiveComponent } from './create-course/create-course-reactive/create-course-reactive.component';
+import { CustomerListComponent } from './customer/customer-list/customer-list.component';
+import { CustomerService } from '../model/CustomerService';
+import { CustomerRestService } from '../model/CustomerRestService';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     CourseListComponent,
     CreateCourseComponent,
-    CreateCourseReactiveComponent
+    CreateCourseReactiveComponent,
+    CustomerListComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +31,8 @@ import { CreateCourseReactiveComponent } from './create-course/create-course-rea
     RouterModule.forRoot([
       
       { path: 'welcome', component: HomeComponent},
-      { path: 'course', component: CourseListComponent},
+      { path: 'courses', component: CourseListComponent},
+      { path: 'customers', component: CustomerListComponent},
       { path: 'createCourse', component: CreateCourseComponent},
       { path: 'createCourseReactive', component: CreateCourseReactiveComponent},
       { path: '', redirectTo: 'welcome', pathMatch: 'full'},
@@ -37,8 +42,9 @@ import { CreateCourseReactiveComponent } from './create-course/create-course-rea
   ],
   providers: [
     // { provide: CourseService, useClass: CourseRestService }
-    { provide: CourseService, useClass: CourseMemoryService }
+    { provide: CourseService, useClass: CourseRestService },
+    { provide: CustomerService, useClass: CustomerRestService }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent] 
 })
 export class AppModule { }

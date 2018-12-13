@@ -10,13 +10,18 @@
           <label class="col-md-2 control-label" for="titleId">Title</label>
 
           <div class="col-md-8">
-            <input class="form-control" id="titleId" type="text" placeholder="(required)" formControlName="title" />
+            <input class="form-control" id="titleId" type="text"
+            [(ngModel)] = "course.title"
+             placeholder="(required)" formControlName="title" />
             <span class="help-block" *ngIf="(courseForm.get('title').touched || courseForm.get('title').dirty) && courseForm.get('title').errors">
               <span *ngIf="courseForm.get('title').errors?.required">
-                Please enter the book title.
+                Please enter the course title.
               </span>
               <span *ngIf="courseForm.get('title').errors?.minlength">
-                The title must be longer than 3 characters.
+                The title must be longer than 2 characters.
+              </span>
+              <span *ngIf="courseForm.get('title').errors?.minlength">
+                The title must be less than 20 characters.
               </span>
             </span>
           </div>
@@ -26,17 +31,19 @@
           <label class="col-md-2 control-label" for="lastNameId">Instructor</label>
 
           <div class="col-md-8">
-            <input class="form-control" id="instructorId" type="text" placeholder="(required 5-10 character)"
+            <input class="form-control" id="instructorId" type="text"
+              [(ngModel)] = "course.instructor"
+              placeholder="(required 5-10 character)"
               formControlName="instructor" />
             <span class="help-block" *ngIf="(courseForm.get('instructor').touched || courseForm.get('instructor').dirty) && courseForm.get('instructor').errors">
               <span *ngIf="courseForm.get('instructor').errors.required">
                 Please enter the instructor name.
               </span>
               <span *ngIf="courseForm.get('instructor').errors?.minlength">
-                The title must be longer than 5 characters.
+                The instructor name must be longer than 2 characters.
               </span>
               <span *ngIf="courseForm.get('instructor').errors?.maxlength">
-                The title must be less than 10 characters.
+                The instructor name must be less than 20 characters.
               </span>
             </span>
           </div>
@@ -50,7 +57,9 @@
             <label class="col-md-2 control-label" for="durationId">Duration</label>
 
             <div class="col-md-8">
-              <input class="form-control" id="durationId" type="text" placeholder="(required)" formControlName="duration" />
+              <input class="form-control" id="durationId" type="text" 
+              [(ngModel)] = "course.duration"
+              placeholder="(required)" formControlName="duration" />
               <span class="help-block" *ngIf="(courseForm.get('commercialGroup.duration').touched || courseForm.get('commercialGroup.duration').dirty) && courseForm.get('commercialGroup.duration').errors">
                 <span *ngIf="courseForm.get('commercialGroup.duration').errors?.required">
                   Please enter the course duration.
@@ -67,7 +76,9 @@
             <label class="col-md-2 control-label" for="priceId">Price</label>
 
             <div class="col-md-8">
-              <input class="form-control" id="priceId" type="text" placeholder="(required)" formControlName="price" />
+              <input class="form-control" id="priceId" type="text" 
+              [(ngModel)] = "course.price"
+              placeholder="(required)" formControlName="price" />
               <span class="help-block" *ngIf="(courseForm.get('commercialGroup.price').touched || courseForm.get('commercialGroup.price').dirty) && courseForm.get('commercialGroup.price').errors || courseForm.get('commercialGroup').errors">
                 <span *ngIf="courseForm.get('commercialGroup.price').errors?.required">
                   Please enter the course price.
@@ -76,7 +87,7 @@
                   Price must be a number
                </span>
                 <span *ngIf="courseForm.get('commercialGroup').errors?.economy">
-                  Price for long courses longer than {{courseForm.get('commercialGroup').errors?.economy.limit}}
+                  Price for  courses longer than {{courseForm.get('commercialGroup').errors?.economy.limit}}
                    must cost more than {{courseForm.get('commercialGroup').errors?.economy.minPrice}}
                 </span>
             

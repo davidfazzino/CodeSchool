@@ -33,19 +33,16 @@
             <input class="form-control" id="instructorId" type="text" 
             placeholder="(required)"
              required minlength="4"
-              maxlength="10" 
+         
               pattern="^[a-zA-Z ]+$" [(ngModel)]="newCourse.instructor" name="instructor" #instructor="ngModel" />
             <span class="help-block" *ngIf="(instructor.touched || instructor.dirty) && instructor.errors">
               <span *ngIf="instructor.errors?.required">
                 Please enter an instructor name.
               </span>
-              <span *ngIf="title.errors?.maxlength">
-                The instructor name cannot have more than 10 characters.
-              </span>
-              <span *ngIf="title.errors?.minlength">
+              <span *ngIf="instructor.errors?.minlength">
                 The instructor name must have at least 4 chars.
               </span>
-              <span *ngIf="title.errors?.pattern">
+              <span *ngIf="instructor.errors?.pattern">
                 The instructor name must contain only letters
               </span>
             </span>

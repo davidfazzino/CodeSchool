@@ -7,8 +7,9 @@ import { Injectable } from "@angular/core";
 
 @Injectable()
 export class CourseRestService extends CourseService {
-
-    private courseUrl = 'api/courses/courses.json';
+   
+    private courseUrl ='http://localhost:8080/spring-crm-rest/api/courses';
+    //private courseUrl = 'api/courses/courses.json';
     constructor(private http: HttpClient)
     {
         super();
@@ -20,10 +21,11 @@ export class CourseRestService extends CourseService {
       .pipe(
           tap(d => console.log(JSON.stringify(d)))
       );
+      }
+
+    saveCourse(course:Course): Observable<Course> {
+        return this.http.post<Course>(this.courseUrl, course);
     }
-
-
-
 
     private handleError(err: HttpErrorResponse): any {
         let errorMessage = '';

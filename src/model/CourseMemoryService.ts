@@ -4,8 +4,13 @@ import {Observable} from "rxjs"
 import { of } from 'rxjs'; 
 
 export class CourseMemoryService extends CourseService {
+   
     getAllCourses() : Observable<Course[]> {
         return of(this.courses);
+    }
+
+    saveCourse(course:Course): Observable<Course> {
+        throw new Error("Method not implemented.");
     }
 
     private courses: Course[] = [

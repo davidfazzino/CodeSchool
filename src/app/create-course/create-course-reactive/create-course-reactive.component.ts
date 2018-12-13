@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 import { Course } from '../../../model/Course';
+import { CourseService } from '../../../model/CourseService';
 
 function courseEconomyValidator(ac:AbstractControl) : {[key:string]:boolean} | null {
   //console.log("validator custom");
@@ -34,15 +35,15 @@ function ValidatePriceLimits(durationLimit: number, minPrice: number): Validator
 export class CreateCourseReactiveComponent implements OnInit {
   courseForm:FormGroup;
   course:Course;
-  constructor(private builder:FormBuilder) { }
+  constructor(private builder:FormBuilder, private service: CourseService) { }
 
   ngOnInit() {
-    console.log("on init");
+    this.course = new Course();
      this.courseForm= this.builder.group( {
           'title' : ['Angular for dummies', 
-        [ Validators.required, Validators.minLength(5), Validators.maxLength(10)]],
+        [ Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
         'instructor' : ['Ciccio Pasticcio', 
-        [ Validators.required, Validators.minLength(5), Validators.maxLength(10)]],
+        [ Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
 
 
         commercialGroup: this.builder.group( {
@@ -62,8 +63,14 @@ export class CreateCourseReactiveComponent implements OnInit {
   }
 
   save(courseForm: FormGroup) : void {
-    console.log(courseForm.value);
-    console.log(JSON.stringify(this.course));
+    console.log(this.courseForm.value);
+    this.service.saveCourse(this.course).subscribe(
+      c => {
+        console.log("course saved ");
+        console.log(JSON.stringify(c));
+      } 
+      
+    );
   }
 
   showStatus() : void {

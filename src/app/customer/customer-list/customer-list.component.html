@@ -13,26 +13,24 @@
 
       <div class="table-responsive">
           <table class="table" 
-          *ngIf="filteredCourses && filteredCourses.length"
+          *ngIf="filteredCustomers && filteredCustomers.length"
           >
               <thead>
                   <tr>
-                      <th>Title</th>
-                      <th>Instructor</th>
-                      <th>Duration</th>
-                      <th>Price</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Email</th>
                   </tr>
               </thead>
               <tbody>
-                 <tr *ngFor="let course of filteredCourses">
+                 <tr *ngFor="let customer of filteredCustomers">
                       
-                     <td><a [routerLink]="['/courses', course.id ]">
-                         {{course.title | uppercase}}
+                     <td><a [routerLink]="['/customers', customer.id ]">
+                         {{customer.firstName | uppercase}}
                      </a>
                       </td>
-                      <td>{{course.instructor}}</td>
-                     <td>{{course.duration}} days</td>
-                     <td>{{course.price | currency:'EUR':symbol:'1.2-2'}}</td>
+                     <td>{{customer.lastName}}</td>
+                     <td>{{customer.email}}</td>
                  </tr>
               </tbody>
           </table>

@@ -13,31 +13,33 @@ import { CourseService } from '../../model/CourseService';
 export class CourseListComponent implements OnInit {
 
   pageTitle: string = "Available Courses"
-
+  _listFilter:string;
   courses: Course[];
   filteredCourses: Course[];
   
 
   constructor(private service: CourseService) {
+  }
 
+  get listFilter(): string {
+    return this._listFilter;
+  }
+  set listFilter(value: string) {
+    this._listFilter = value;
+    this.filteredCourses = this._listFilter ? 
+        this.performFilter(this._listFilter) : this.courses;
   }
 
 
-  // constructor(httpClient:HttpClient) {   
-  //     this.service = new CourseRestService(httpClient);
+  performFilter(filterBy: string): Course[] {
+    filterBy = filterBy.toLocaleLowerCase();
 
-  //     // this.filteredCourses = [
-  //     //   new Course(1,"pipo", 100,100),
-  //     //   new Course(1,"pipo", 100,100)
-  //     // ];
-  // }
+    return this.courses.filter( c => c.title.toLocaleLowerCase()
+    .indexOf(filterBy) != -1 );
+  }
 
-//   constructor() { 
-//     this.service = new CourseMemoryService();
-// }
 
   ngOnInit() {
-  //  this.courses = this.service.getAllCourses();
     this.service.getAllCourses().subscribe (
       cs => { this.courses = cs; this.filteredCourses = cs;},
       error => {console.log(" errore " + error);}

@@ -4,9 +4,9 @@ export class Course {
     // duration:number;
     // price:number;
      
-    constructor(public id:number, public title:string,
-         public instructor:string, public duration:number, 
-        public price:number) {
+    constructor(public id:number=null, public title:string=null,
+         public instructor:string=null, public duration:number=null, 
+        public price:number=null) {
         
     }
 
