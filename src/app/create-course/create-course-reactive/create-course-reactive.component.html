@@ -26,7 +26,8 @@
           <label class="col-md-2 control-label" for="lastNameId">Instructor</label>
 
           <div class="col-md-8">
-            <input class="form-control" id="instructorId" type="text" placeholder="(required 5-10 character)" formControlName="instructor" />
+            <input class="form-control" id="instructorId" type="text" placeholder="(required 5-10 character)"
+              formControlName="instructor" />
             <span class="help-block" *ngIf="(courseForm.get('instructor').touched || courseForm.get('instructor').dirty) && courseForm.get('instructor').errors">
               <span *ngIf="courseForm.get('instructor').errors.required">
                 Please enter the instructor name.
@@ -41,51 +42,63 @@
           </div>
         </div>
 
-        <div class="form-group" [ngClass]="{'is-invalid': (courseForm.get('duration').touched || courseForm.get('duration').dirty) && !courseForm.get('duration').valid }">
-          <label class="col-md-2 control-label" for="durationId">Duration</label>
 
-          <div class="col-md-8">
-            <input class="form-control" id="durationId" type="text" placeholder="(required)" formControlName="duration" />
-            <span class="help-block" *ngIf="(courseForm.get('duration').touched || courseForm.get('duration').dirty) && courseForm.get('duration').errors">
-              <span *ngIf="courseForm.get('duration').errors?.required">
-                Please enter the course duration.
+        <div formGroupName="commercialGroup">
+
+
+          <div class="form-group" [ngClass]="{'is-invalid': (courseForm.get('commercialGroup.duration').touched || courseForm.get('commercialGroup.duration').dirty) && !courseForm.get('commercialGroup.duration').valid }">
+            <label class="col-md-2 control-label" for="durationId">Duration</label>
+
+            <div class="col-md-8">
+              <input class="form-control" id="durationId" type="text" placeholder="(required)" formControlName="duration" />
+              <span class="help-block" *ngIf="(courseForm.get('commercialGroup.duration').touched || courseForm.get('commercialGroup.duration').dirty) && courseForm.get('commercialGroup.duration').errors">
+                <span *ngIf="courseForm.get('commercialGroup.duration').errors?.required">
+                  Please enter the course duration.
+                </span>
+                <span *ngIf="courseForm.get('commercialGroup.duration').errors?.pattern">
+                  This field must be a number.
+                </span>
               </span>
-              <span *ngIf="courseForm.get('duration').errors?.pattern">
-                This field must be a number.
-              </span>
-            </span>
+            </div>
           </div>
-        </div>
 
 
-        <div class="form-group" [ngClass]="{'is-invalid': (courseForm.get('price').touched || courseForm.get('price').dirty) && !courseForm.get('price').valid }">
-          <label class="col-md-2 control-label" for="priceId">Price</label>
+          <div class="form-group" [ngClass]="{'is-invalid': (courseForm.get('commercialGroup.price').touched || courseForm.get('commercialGroup.price').dirty) && !courseForm.get('commercialGroup.price').valid }">
+            <label class="col-md-2 control-label" for="priceId">Price</label>
 
-          <div class="col-md-8">
-            <input class="form-control" id="priceId" type="text" placeholder="(required)" formControlName="price" />
-            <span class="help-block" *ngIf="(courseForm.get('price').touched || courseForm.get('price').dirty) && courseForm.get('price').errors">
-              <span *ngIf="courseForm.get('price').errors?.required">
-                Please enter the course price.
+            <div class="col-md-8">
+              <input class="form-control" id="priceId" type="text" placeholder="(required)" formControlName="price" />
+              <span class="help-block" *ngIf="(courseForm.get('commercialGroup.price').touched || courseForm.get('commercialGroup.price').dirty) && courseForm.get('commercialGroup.price').errors || courseForm.get('commercialGroup').errors">
+                <span *ngIf="courseForm.get('commercialGroup.price').errors?.required">
+                  Please enter the course price.
+                </span>
+                <span *ngIf="courseForm.get('commercialGroup.price').errors?.pattern">
+                  Price must be a number
+               </span>
+                <span *ngIf="courseForm.get('commercialGroup').errors?.economy">
+                  Price for long courses longer than {{courseForm.get('commercialGroup').errors?.economy.limit}}
+                   must cost more than {{courseForm.get('commercialGroup').errors?.economy.minPrice}}
+                </span>
+            
               </span>
-              <span *ngIf="courseForm.get('price').errors?.pattern">
-                This field must be a number.
-              </span>
-            </span>
+            </div>
           </div>
+
         </div>
-
-
         <div class="form-group">
           <div class="col-md-4 col-md-offset-2">
             <span>
               <button class="btn btn-primary" type="submit" [disabled]="!courseForm.valid">
                 Save
               </button>
+
+
             </span>
           </div>
         </div>
       </fieldset>
     </form>
+ 
   </div>
 </div>
 
